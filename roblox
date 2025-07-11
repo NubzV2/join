@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Join Roblox Game</title>
+  <meta charset="utf-8" />
+  <script>
+    // Read query parameters for placeId and gameInstanceId
+    function getQueryVariable(variable) {
+      const query = window.location.search.substring(1);
+      const vars = query.split("&");
+      for (let i = 0; i < vars.length; i++) {
+        const pair = vars[i].split("=");
+        if(pair[0] === variable) {
+          return decodeURIComponent(pair[1]);
+        }
+      }
+      return null;
+    }
+
+    const placeId = getQueryVariable("placeId");
+    const gameInstanceId = getQueryVariable("gameInstanceId");
+    if (placeId && gameInstanceId) {
+      const robloxLink = `roblox://placeId=${placeId}&gameInstanceId=${gameInstanceId}`;
+      window.location.href = robloxLink;
+    } else {
+      document.write("Missing parameters.");
+    }
+  </script>
+</head>
+<body>
+  <p>If you are not redirected automatically, <a id="joinLink" href="#">click here</a>.</p>
+  <script>
+    const joinLink = document.getElementById("joinLink");
+    if (joinLink) {
+      joinLink.href = `roblox://placeId=${placeId}&gameInstanceId=${gameInstanceId}`;
+    }
+  </script>
+</body>
+</html>
